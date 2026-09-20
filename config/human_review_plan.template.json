@@ -1,0 +1,207 @@
+{
+  "schema_version": "human-review-plan-v1",
+  "template_only": true,
+  "review_id": null,
+  "build_ref": null,
+  "run_id": null,
+  "asset_sha256": null,
+  "media_range": null,
+  "policy_ref": null,
+  "registry_ref": null,
+  "human_acceptance": "pending",
+  "mode": "REPLAY_EXACT",
+  "inference_allowed": false,
+  "new_jev_requests_allowed": false,
+  "writeback_to_run_allowed": false,
+  "sampling": {
+    "strategy": "representative_manual",
+    "complete_semantic_coverage_claimed": false,
+    "reviewed_target_count": 0,
+    "scope_note": null
+  },
+  "checks": [
+    {
+      "id": "HC-01",
+      "feature_id": "media_sync",
+      "label": "実動画と保存runの対応",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-02",
+      "feature_id": "asr_raw",
+      "label": "原音声とASR原文",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-03",
+      "feature_id": "media_sync",
+      "label": "発話区間の反復",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-04",
+      "feature_id": "visual_observation",
+      "label": "原frameと画像解釈",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-05",
+      "feature_id": "text_context",
+      "label": "会話の話題と様式",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-06",
+      "feature_id": "field_state",
+      "label": "全場と根拠",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-07",
+      "feature_id": "unknown_triage",
+      "label": "UNKNOWNと停止原因",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-08",
+      "feature_id": "dominance_readout",
+      "label": "Jev質問・数値・採否",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-09",
+      "feature_id": "media_sync",
+      "label": "二つの時刻とcursor",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-10",
+      "feature_id": "review_storage",
+      "label": "注釈の保存と再読込",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-11",
+      "feature_id": "review_export",
+      "label": "問題exportと再確認",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    },
+    {
+      "id": "HC-12",
+      "feature_id": "capabilities",
+      "label": "将来機能の未実装表示",
+      "required_for_h0": true,
+      "availability": "to_inspect",
+      "automation_status": "not_run",
+      "human_operation_status": "unreviewed",
+      "semantic_status": "unreviewed",
+      "review_record_ids": [],
+      "not_applicable_reason": null
+    }
+  ],
+  "future_features": [
+    {
+      "id": "future_category",
+      "availability": "planned",
+      "current_implementation_claimed": false,
+      "human_status": "unreviewed"
+    },
+    {
+      "id": "future_codex_review",
+      "availability": "planned",
+      "current_implementation_claimed": false,
+      "human_status": "unreviewed"
+    },
+    {
+      "id": "future_registry",
+      "availability": "planned",
+      "current_implementation_claimed": false,
+      "human_status": "unreviewed"
+    },
+    {
+      "id": "future_asr_detection",
+      "availability": "planned",
+      "current_implementation_claimed": false,
+      "human_status": "unreviewed"
+    },
+    {
+      "id": "future_asr_correction",
+      "availability": "planned",
+      "current_implementation_claimed": false,
+      "human_status": "unreviewed"
+    },
+    {
+      "id": "future_asr_review",
+      "availability": "planned",
+      "current_implementation_claimed": false,
+      "human_status": "unreviewed"
+    }
+  ],
+  "restriction": "結果を捏造しない。人間レビューは対象build・素材・時刻の範囲だけに適用。"
+}

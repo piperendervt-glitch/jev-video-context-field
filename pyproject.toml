@@ -1,0 +1,9 @@
+[project]
+name = "jev-video-context-fields"
+version = "0.2.0"
+requires-python = ">=3.12"
+description = "Offline-first local video context fields prototype"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["local: explicitly run installed CPU observers; never downloads models"]

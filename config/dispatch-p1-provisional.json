@@ -1,0 +1,15 @@
+{
+  "id": "p1-provisional-v1",
+  "concurrency": 4,
+  "rps": 4,
+  "burst": 4,
+  "evidence_rps": null,
+  "dominance_rps": null,
+  "queue_requests": 64,
+  "queue_bytes": 768000,
+  "request_units": 3,
+  "request_questions": 12,
+  "request_chars": 12000,
+  "batch": true,
+  "dynamic_units": null
+}

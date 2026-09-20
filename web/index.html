@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jev · 動画文脈場</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><div class="brand"><span class="mark">j</span><div>Jev <span class="sub">/ CONTEXT FIELDS</span></div></div><div class="header-right"><span class="dot"></span> LOCAL WORKSPACE <span id="mode" class="badge">MOCK</span></div></header>
+<main>
+<div class="intro"><div><div class="eyebrow">VIDEO CONTEXT LAB · v0.3 M3a</div><h1>映像から、文脈のうつろいへ。</h1><p>人物・場所・会話の痕跡と、その根拠をたどる。</p></div><div class="session-label">LOCAL SESSION<br><span id="session-id">接続中…</span></div></div>
+<div class="workspace">
+<section class="media-column">
+<div class="section-heading"><h2>01 <span>観測する</span></h2><span id="play-state">一時停止</span></div>
+<div class="video-shell"><video id="video" playsinline preload="metadata"></video><div class="video-caption"><span id="video-label">SYNTHETIC FOOTAGE</span><span>LOCAL ONLY</span></div></div>
+<div class="transport"><button id="play" class="primary">▶ 再生</button><button id="step" title="次の0.1秒を公開して一時停止">1更新進む</button><button id="stop">停止</button><output id="time">00.0 / 32.0 s</output></div>
+<label class="seek-label" for="seek">再生位置 <span>シークすると場を初期化</span></label><input id="seek" type="range" min="0" max="32" step="0.1" value="0">
+<div class="source-row"><button id="local" class="primary">ローカル動画を開く</button><input id="file-input" type="file" accept="video/*,.mkv,.m4v" hidden><button id="demo">合成デモ</button><button id="replay">記録をReplay</button><button id="live-start" hidden>選択動画で承認済みLIVEを開始</button></div>
+<section id="local-input"><p>動画はこのPCのlocalhostへ取込みます。インターネットには送信しません。最大2 GiB。</p><progress id="upload-progress" value="0" max="100" hidden></progress><div id="upload-status" role="status"></div><div id="asset-info"></div><div id="range-controls" hidden><label for="analysis-start">解析の開始位置（秒）</label><input id="analysis-start" type="number" min="0" step="0.1" value="0"><button id="prepare-local">この位置から最大120秒を解析</button><button id="delete-asset">取込みコピーを削除</button></div><p id="model-status">ローカルモデルの準備状態を確認中…</p><div id="transcript"></div><div id="visual-description"></div></section>
+<section class="transcript-panel" aria-label="時刻付き会話原文"><h2>会話原文 <small>ASR · 原言語</small></h2><div id="transcript-state" role="status"></div><div id="transcript-current"></div><details><summary>原文の改訂履歴</summary><div id="transcript-history"></div></details><h3>ローカルモデルの解釈</h3><div id="text-interpretation"></div></section>
+<div id="replay-box" hidden><label for="replay-index">記録イベント順 <output id="replay-position"></output></label><input id="replay-index" type="range" min="0" max="0" value="0"><p>記録済みの濃度・読取り・失効を復元。新しい解析は行いません。</p></div>
+<div class="note"><span class="badge" id="origin-badge">合成</span><p id="mode-note">映像と意味評価は固定fixtureです。Jevの実評価や、AIの理解性能を示すデモではありません。20秒以降は新しい証拠がなく、蒸発と評価の失効を確認できます。</p></div>
+<section class="inspection"><div class="section-heading"><h2>根拠をたどる</h2><span>INSPECTOR</span></div><div id="inspection"><p class="empty">右の濃度タイルを選ぶと、出典・支持と反証・数値更新を確認できます。</p></div></section>
+<section class="observers"><div class="section-heading"><h2>観測エージェント</h2><span id="queue-count">待機 0</span></div><div id="adapters"></div><pre id="measurements">実画素のローカル計測を待機しています。</pre></section>
+</section>
+<section class="fields-column"><div class="section-heading"><h2>02 <span>文脈を読む</span></h2><span>濃度と意味評価は別の数値</span></div><div id="panels"></div></section>
+</div>
+<section class="timeline"><div class="section-heading"><h2>03 <span>変化を追う</span></h2><div class="legend"><span class="person">● 人物</span><span class="place">● 場所</span><span class="conversation">● 会話</span><span>実線 = UNKNOWN</span></div></div><canvas id="history" width="1200" height="130" aria-label="三つの場のUNKNOWN濃度履歴"></canvas><div class="timeline-foot"><span>100% ↑　不明の割合　↓ 0%</span><span id="epoch">epoch 1</span><span>メディア時刻に同期 · 場 10Hz</span></div></section>
+<section class="activity"><div><div class="section-heading"><h2>処理ログ</h2><button id="export">記録を書き出す</button></div><div id="events" class="event-list"></div></div><aside><h2>実行状況</h2><dl id="stats"></dl><label class="switch"><input type="checkbox" id="reader" checked> ContextReaderの追加確認</label><p>同一rootを再確認しても、独立した証拠は増えません。</p></aside></section>
+<div id="error" role="alert" hidden></div>
+</main><footer>JEV VIDEO CONTEXT FIELDS <span>UNKNOWNを残す。根拠を残す。</span><span>濃度は正解確率ではありません。</span></footer>
+<script src="/app.js"></script></body></html>

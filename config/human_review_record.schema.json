@@ -1,0 +1,603 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "H0 HumanReviewRecord v1",
+  "description": "保存形式の提案。ID・媒体・版・時間・権限の参照整合性、範囲start<=endはアプリで検査。人間の申告を自動的な正解にしない。",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "human-review-v1"
+    },
+    "record_kind": {
+      "const": "human_review"
+    },
+    "review_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersedes_record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "author_kind": {
+          "const": "human"
+        },
+        "identity_assurance": {
+          "const": "local_self_declared"
+        }
+      },
+      "required": [
+        "label",
+        "author_kind",
+        "identity_assurance"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_kind": {
+          "enum": [
+            "model_record",
+            "media_span",
+            "feature_check",
+            "diagnostic_record"
+          ]
+        },
+        "target_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "feature_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "epoch": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "event_cursor": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "record_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "record_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "asset_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "audio_interval",
+                  "video_frame",
+                  "video_interval",
+                  "transcript",
+                  "model_input",
+                  "diagnostic_record"
+                ]
+              },
+              "source_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source_revision": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "media_range": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "start_s": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "end_s": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "start_s",
+                      "end_s"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "pts": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "time_base": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "match_kind": {
+                "enum": [
+                  "exact",
+                  "covering_interval",
+                  "reconstructed",
+                  "unverified",
+                  "missing",
+                  "not_applicable"
+                ]
+              },
+              "missing_reasons": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "kind",
+              "source_id",
+              "source_revision",
+              "media_range",
+              "pts",
+              "time_base",
+              "match_kind",
+              "missing_reasons"
+            ]
+          }
+        },
+        "build_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "policy_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "registry_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "media_match": {
+          "enum": [
+            "hash_verified",
+            "unverified",
+            "mismatch",
+            "missing",
+            "not_applicable"
+          ]
+        },
+        "missing_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "target_kind",
+        "target_id",
+        "feature_id",
+        "run_id",
+        "epoch",
+        "event_cursor",
+        "record_ref",
+        "record_version",
+        "asset_sha256",
+        "source_refs",
+        "build_ref",
+        "policy_ref",
+        "registry_ref",
+        "media_match",
+        "missing_reasons"
+      ]
+    },
+    "view_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "REPLAY_EXACT",
+            "MEDIA_ONLY_REVIEW",
+            "LOCAL_REAL_EVAL_MOCK",
+            "LIVE_JEV",
+            "STATIC_POLICY_COMPARE"
+          ]
+        },
+        "review_playhead_media_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "source_as_of_media_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "recorded_display_media_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "pinned_cursor": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "review_basis": {
+          "enum": [
+            "recorded_input",
+            "posthoc_past_media",
+            "hindsight",
+            "diagnostic_only",
+            "unknown"
+          ]
+        },
+        "model_output_exposure": {
+          "enum": [
+            "not_shown_before_annotation",
+            "shown_before_annotation",
+            "unknown"
+          ]
+        },
+        "future_content_exposure": {
+          "enum": [
+            "none_reported",
+            "seen",
+            "unknown"
+          ]
+        },
+        "reviewed_evidence": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "audio_listened",
+              "video_watched",
+              "frame_viewed",
+              "transcript_read",
+              "diagnostic_values_read"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "human_evidence_confirmation": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "mode",
+        "review_playhead_media_s",
+        "source_as_of_media_s",
+        "recorded_display_media_s",
+        "pinned_cursor",
+        "review_basis",
+        "model_output_exposure",
+        "future_content_exposure",
+        "reviewed_evidence",
+        "human_evidence_confirmation"
+      ]
+    },
+    "judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "review_status": {
+          "enum": [
+            "draft",
+            "submitted"
+          ]
+        },
+        "semantic_verdict": {
+          "enum": [
+            "consistent_with_evidence",
+            "partially_inconsistent",
+            "contradicted_by_evidence",
+            "ambiguous",
+            "not_assessable",
+            "unreviewed"
+          ]
+        },
+        "numeric_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "pass",
+                "fail",
+                "unknown",
+                "not_applicable"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "check_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "evidence_ids",
+            "check_version"
+          ]
+        },
+        "pipeline_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "pass",
+                "fail",
+                "unknown",
+                "not_applicable"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "check_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "evidence_ids",
+            "check_version"
+          ]
+        },
+        "issue_tags": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "asr_mismatch",
+              "input_gap",
+              "visual_mismatch",
+              "wrong_subject",
+              "wrong_time",
+              "unsupported_inference",
+              "stale_display",
+              "numeric_contract",
+              "ui_problem",
+              "category_gap_candidate",
+              "unknown_appropriate",
+              "missing_evidence",
+              "other"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "severity": {
+          "enum": [
+            "blocking",
+            "major",
+            "minor",
+            "observation",
+            "not_set"
+          ]
+        },
+        "expected_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "actual_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        },
+        "requested_action": {
+          "enum": [
+            "none",
+            "investigate",
+            "repair_pipeline",
+            "review_definition",
+            "verify_again",
+            "retain_unknown"
+          ]
+        }
+      },
+      "required": [
+        "review_status",
+        "semantic_verdict",
+        "numeric_check",
+        "pipeline_check",
+        "issue_tags",
+        "severity",
+        "expected_text",
+        "actual_text",
+        "note",
+        "requested_action"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_basis": {
+          "enum": [
+            "personal_reference",
+            "rubric_based",
+            "not_assessable"
+          ]
+        },
+        "source_run_mutated": {
+          "const": false
+        },
+        "feedback_into_inference": {
+          "const": false
+        },
+        "is_test_fixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "created_at",
+        "reference_basis",
+        "source_run_mutated",
+        "feedback_into_inference",
+        "is_test_fixture"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_kind",
+    "review_id",
+    "record_id",
+    "record_revision",
+    "supersedes_record_id",
+    "idempotency_key",
+    "reviewer",
+    "target",
+    "view_context",
+    "judgment",
+    "provenance"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "judgment": {
+            "properties": {
+              "review_status": {
+                "const": "submitted"
+              },
+              "semantic_verdict": {
+                "enum": [
+                  "consistent_with_evidence",
+                  "partially_inconsistent",
+                  "contradicted_by_evidence",
+                  "ambiguous"
+                ]
+              }
+            },
+            "required": [
+              "review_status",
+              "semantic_verdict"
+            ]
+          }
+        },
+        "required": [
+          "judgment"
+        ]
+      },
+      "then": {
+        "properties": {
+          "view_context": {
+            "properties": {
+              "reviewed_evidence": {
+                "minItems": 1
+              },
+              "human_evidence_confirmation": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
