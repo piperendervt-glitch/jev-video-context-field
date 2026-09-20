@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$taskRoot = 'C:\dev\jev-video-context-field-po'
+$taskRoot = Split-Path -Parent $PSScriptRoot
 if ((Get-Location).Path -ne $taskRoot) { throw 'workspace_mismatch' }
 $taskOut = Join-Path $taskRoot 'artifacts\cd-display-acceptance\cd-display-acceptance-20260920-v1'
 $listener = @(Get-NetTCPConnection -LocalPort 8876 -State Listen -ErrorAction SilentlyContinue)

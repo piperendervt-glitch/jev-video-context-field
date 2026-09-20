@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$taskRoot = 'C:\dev\jev-video-context-field-po'
+$taskRoot = Split-Path -Parent $PSScriptRoot
 if ((Get-Location).Path -ne $taskRoot) { throw 'workspace_mismatch' }
 $taskOut = Join-Path $taskRoot 'artifacts\human-debug-h12\20260920'
 $listener = @(Get-NetTCPConnection -LocalPort 8876 -State Listen -ErrorAction SilentlyContinue)

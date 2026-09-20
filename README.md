@@ -3,7 +3,7 @@
 ローカル動画の解析根拠、人物・場所・会話の場、Jevの評価、人間の判定を照合するViewerです。現在の確認用起動は非LIVE debug/replayです。
 
 ```powershell
-Set-Location -LiteralPath 'C:\dev\jev-video-context-field-po'
+Set-Location -LiteralPath 'C:\dev\jev-video-context-field'
 .\.venv\Scripts\python.exe -X utf8 -m context_fields.debug_server --port 8876
 ```
 
